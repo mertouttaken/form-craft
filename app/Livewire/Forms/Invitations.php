@@ -8,6 +8,8 @@ class Invitations extends Component
 {
     public function render()
     {
-        return view('livewire.forms.invitations');
+        return view('livewire.forms.invitations')
+            ->extends('formcraft.invitation')
+            ->section('page');
     }
 }

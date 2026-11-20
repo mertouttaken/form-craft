@@ -20,20 +20,20 @@
   }
   .env__front {
     z-index: 1;
-    background: linear-gradient(155deg, transparent 49%, #966f3424 50%, transparent 51%) left / 51% 100% no-repeat,
-                linear-gradient(205deg, transparent 49%, #966f3424 50%, transparent 51%) right / 51% 100% no-repeat,
+    background: linear-gradient(155deg, transparent 49%, color-mix(in srgb, var(--fc-gold) 14%, transparent) 50%, transparent 51%) left / 51% 100% no-repeat,
+                linear-gradient(205deg, transparent 49%, color-mix(in srgb, var(--fc-gold) 14%, transparent) 50%, transparent 51%) right / 51% 100% no-repeat,
                 var(--canary);
-    box-shadow: 0 1.5rem 2.5rem -1.25rem #080d1e;
+    box-shadow: 0 1.5rem 2.5rem -1.25rem var(--fc-navy-deep);
     display: flex; justify-content: end; align-items: end; padding: .6rem .85rem;
   }
   .env__flap {
     z-index: 2; transform-origin: top;
-    filter: drop-shadow(0 3px 1px #58431e42);
+    filter: drop-shadow(0 3px 1px color-mix(in srgb, var(--fc-ink) 26%, transparent));
     animation: envelope-open 560ms cubic-bezier(.5, .04, .24, 1) 70ms both;
   }
   .env__flap::before {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(#efdba0, #dfc789);
+    background: linear-gradient(var(--fc-canary), var(--fc-canary-2));
     clip-path: polygon(0 0, 100% 0, 51% 95%, 49% 95%);
   }
   /* The sleeve cuts off the part of the letter still inside the pocket. */
@@ -46,7 +46,7 @@
     animation: invitation-rise 900ms cubic-bezier(.22, .72, .23, 1) 360ms both;
   }
   .letter .serial { position: static; display: block; margin-bottom: .55rem; }
-  .letter h1 { margin: .5rem 0 .65rem; font-size: clamp(1.55rem, 1rem + 1.6vw, 2.2rem); font-weight: 800; font-variation-settings: "wdth" 110; line-height: 1.05; }
+  .letter h1 { margin: .5rem 0 .65rem; font-size: clamp(1.55rem, 1rem + 1.6vw, 2.2rem); font-weight: 800; font-family: var(--fc-font-display); font-variation-settings: "wdth" 110; line-height: 1.05; }
   .letter .acts { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
   .letter .note { margin: .65rem 0 0; color: var(--ink-2); font-size: .8rem; }
   .postmark { --r: -5deg; font-size: .7rem; }
@@ -86,5 +86,5 @@
 @endpush
 
 @section('content')
-<livewire:forms.invitations />
+@yield('page')
 @endsection

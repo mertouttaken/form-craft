@@ -7,9 +7,10 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <!-- Fonts and palette: self-hosted, see public/formcraft/fonts.css -->
+        @foreach (['fonts', 'palette'] as $sheet)
+            <link rel="stylesheet" href="{{ asset("formcraft/{$sheet}.css") }}?v={{ filemtime(public_path("formcraft/{$sheet}.css")) }}">
+        @endforeach
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

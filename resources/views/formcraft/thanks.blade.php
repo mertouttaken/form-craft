@@ -17,7 +17,7 @@
   .receipt__body .stamp { margin-top: .9rem; font-size: 1.08rem; --r: -6deg; }
   .receipt-link { margin-top: 1.25rem; }
   .receipt dl { margin: 1.6rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: .6rem 1.5rem; font-size: .95rem; }
-  .receipt dt { color: var(--ink-2); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 72; padding-top: .2rem; }
+  .receipt dt { color: var(--ink-2); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; padding-top: .2rem; }
   .receipt dd { margin: 0; overflow-wrap: anywhere; }
   .stub {
     padding: 1.25rem 2.5rem; display: flex; flex-wrap: wrap; gap: .5rem 1rem;
@@ -30,7 +30,7 @@
   }
   .receipt__body::after { bottom: 0; }
   .stub::before { top: 0; transform: scaleY(-1); }
-  .stub b { font-size: 1.6rem; font-variation-settings: "wdth" 72; color: var(--stamp); }
+  .stub b { font-size: 1.6rem; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; color: var(--stamp); }
   @media (max-width: 460px) {
     .receipt__body, .stub { padding-inline: 1.25rem; }
     .receipt__body { padding-block: 1.65rem; }
@@ -42,5 +42,5 @@
 @endpush
 
 @section('content')
-<livewire:forms.thanks />
+@yield('page')
 @endsection

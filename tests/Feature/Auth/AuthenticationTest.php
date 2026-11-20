@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Workspaces\Forms\Index;
 use App\Models\User;
 use Livewire\Volt\Volt;
 
@@ -43,7 +44,7 @@ test('users can not authenticate with invalid password', function () {
     $this->assertGuest();
 });
 
-test('navigation menu can be rendered', function () {
+test('dashboard renders the FormCraft workspace', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -52,7 +53,7 @@ test('navigation menu can be rendered', function () {
 
     $response
         ->assertOk()
-        ->assertSeeVolt('layout.navigation');
+        ->assertSeeLivewire(Index::class);
 });
 
 test('users can logout', function () {

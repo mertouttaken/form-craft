@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Workspaces;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -11,15 +12,31 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Seed the sample FormCraft data. Every account's password is "password".
+     * Safe to run again: the previous sample rows are removed first.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->removeSampleData();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserSeeder::class,
+            WorkspaceSeeder::class,
+            InvitationSeeder::class,
+            AralikBulusmasiSeeder::class,
+            SampleFormSeeder::class,
         ]);
+    }
+
+    /**
+     * Delete the previous sample rows. Forms, fields, submissions, answers,
+     * invitations and memberships go with their workspace (cascading
+     * foreign keys). Accounts that are not sample accounts stay.
+     */
+    private function removeSampleData(): void
+    {
+        Workspaces::whereIn('slug', WorkspaceSeeder::SLUGS)->delete();
+
+        User::whereIn('email', UserSeeder::EMAILS)->delete();
     }
 }

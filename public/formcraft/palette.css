@@ -1,0 +1,36 @@
+/* FormCraft · one palette for every page.
+   Split-complementary around the blotter navy: canary and pink copies on the
+   warm side, a vermilion stamp ink opposite the navy, a ballpoint blue that
+   stays in the navy family. Every other stylesheet reads these tokens. */
+
+:root {
+  /* desk */
+  --fc-navy:       #17213C;
+  --fc-navy-2:     #243257;
+  --fc-navy-deep:  #0C1328;
+
+  /* paper: white, canary and pink copies */
+  --fc-paper:      #FAF6EC;
+  --fc-paper-2:    #EDE4D0;
+  --fc-canary:     #F4DF9C;
+  --fc-canary-2:   #E2C878;
+  --fc-gold:       #B88A2C;
+  --fc-pink:       #F2D0C8;
+
+  /* ink */
+  --fc-ink:        #1B1E27;
+  --fc-ink-2:      #4B505D;
+  --fc-ink-3:      #6B6F7B;
+  --fc-mist:       #DCE2EE;
+  --fc-pen:        #2444B0;
+  --fc-stamp:      #C63A2E;
+  --fc-stamp-deep: #962A22;
+
+  /* type */
+  --fc-font-display: "Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
+  --fc-font-text:    "Public Sans", system-ui, sans-serif;
+  --fc-font-pen:     "Caveat", "Segoe Print", cursive;
+}
+
+/* Headings take the display face; components can still override. */
+:where(h1, h2, h3, .brand b) { font-family: var(--fc-font-display); }

@@ -1,3 +1,3 @@
-<link rel="stylesheet" href="{{ asset('formcraft/fonts.css') }}">
-<link rel="stylesheet" href="{{ asset('formcraft/scrollcraft.css') }}">
-<link rel="stylesheet" href="{{ asset('formcraft/world.css') }}">
+@foreach (['fonts', 'palette', 'scrollcraft', 'world', 'motion'] as $sheet)
+<link rel="stylesheet" href="{{ asset("formcraft/{$sheet}.css") }}?v={{ filemtime(public_path("formcraft/{$sheet}.css")) }}">
+@endforeach

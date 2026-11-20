@@ -10,7 +10,7 @@
   .sheet { max-width: 60rem; margin: 0 auto; padding: 3rem 3.5rem 0; }
   .step { padding: 2.5rem 0; border-top: 1px solid var(--rule); }
   .step:first-of-type { border-top: 2px solid var(--ink); }
-  .step h2 { margin: 0 0 1.25rem; font-size: 1.35rem; font-weight: 750; font-variation-settings: "wdth" 105; }
+  .step h2 { margin: 0 0 1.25rem; font-size: 1.35rem; font-weight: 750; font-family: var(--fc-font-display); font-variation-settings: "wdth" 105; }
   .step h2 b { color: var(--stamp); margin-right: .5rem; }
   /* Type palette: eight stamps to pick from. */
   .types { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
@@ -36,9 +36,9 @@
 @section('content')
 <header class="topbar">
   <a class="brand" href="{{ route('formcraft.home') }}"><b>FormCraft</b></a>
-  <span class="ws">Pro ekibi <span class="plan">Pro</span></span>
+  <span class="ws">Kişisel alanın <span class="plan">{{ Auth::user()?->planName() ?? 'Ücretsiz' }}</span></span>
   <nav class="nav" aria-label="Çalışma alanı"><a href="{{ route('formcraft.preview.forms') }}" aria-current="page">Formlar</a><a href="{{ route('formcraft.preview.members') }}">Üyeler</a></nav>
   <span class="me"><i>DY</i>Deniz</span>
 </header>
-<livewire:workspaces.forms.fields.create />
+@yield('page')
 @endsection

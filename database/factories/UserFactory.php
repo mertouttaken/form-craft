@@ -30,7 +30,18 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'plan' => User::PLAN_FREE,
         ];
+    }
+
+    /**
+     * Indicate that the user is on the pro plan.
+     */
+    public function pro(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'plan' => User::PLAN_PRO,
+        ]);
     }
 
     /**

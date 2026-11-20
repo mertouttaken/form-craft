@@ -59,6 +59,8 @@ class Index extends Component
 
     public function render(): View
     {
-        return view('livewire.forms.index');
+        return view('livewire.forms.index')
+            ->extends('formcraft.public-form')
+            ->section('page');
     }
 }

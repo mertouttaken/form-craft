@@ -11,11 +11,11 @@
   :focus-visible { outline-color: var(--pen); }
   [data-sc-progress] { background: var(--pen); height: 4px; }
   .mast { position: fixed; inset: 0 0 auto 0; z-index: 20; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; background: color-mix(in oklab, var(--canary) 92%, transparent); border-bottom: 1px solid var(--rule); }
-  .mast b { font-weight: 750; font-variation-settings: "wdth" 105; }
+  .mast b { font-weight: 750; font-family: var(--fc-font-display); font-variation-settings: "wdth" 105; }
   .q { min-height: 100svh; display: grid; align-items: center; padding: 6rem 8vw; border-bottom: 1px dashed var(--rule); }
   .q__in { display: grid; grid-template-columns: 7rem minmax(0, 46rem); gap: 2rem; }
-  .q__no { font-size: 4rem; font-weight: 800; line-height: .9; color: var(--stamp); font-variation-settings: "wdth" 72; }
-  .q label, .q legend { font-size: clamp(1.8rem, 1rem + 2vw, 2.8rem); font-weight: 750; font-variation-settings: "wdth" 108; line-height: 1.05; letter-spacing: -.01em; padding: 0; }
+  .q__no { font-size: 4rem; font-weight: 800; line-height: .9; color: var(--stamp); font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; }
+  .q label, .q legend { font-size: clamp(1.8rem, 1rem + 2vw, 2.8rem); font-weight: 750; font-family: var(--fc-font-display); font-variation-settings: "wdth" 108; line-height: 1.05; letter-spacing: -.01em; padding: 0; }
   .q .req { color: var(--stamp); }
   .q .field__help { margin: .8rem 0 1.75rem; font-size: 1.05rem; }
   .q .input { font-size: 1.6rem; border-bottom-width: 3px; }
@@ -37,5 +37,5 @@
 @endpush
 
 @section('content')
-<livewire:forms.index />
+@yield('page')
 @endsection

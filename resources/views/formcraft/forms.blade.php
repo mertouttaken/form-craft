@@ -12,10 +12,10 @@
 @section('content')
 <header class="topbar">
   <a class="brand" href="{{ route('formcraft.home') }}"><b>FormCraft</b></a>
-  <span class="ws">Deniz Yılmaz'ın alanı <span class="plan">Ücretsiz</span></span>
+  <span class="ws">Kişisel alanın <span class="plan">{{ Auth::user()?->planName() ?? 'Ücretsiz' }}</span></span>
   <nav class="nav" aria-label="Çalışma alanı"><a href="{{ route('formcraft.preview.forms') }}" aria-current="page">Formlar</a><a href="{{ route('formcraft.preview.members') }}">Üyeler</a></nav>
-  <span class="me"><i>DY</i>Deniz</span>
+  <span class="me"><i>{{ substr(Auth::user()?->name, 0, 1) }}</i>{{ Auth::user()?->name ?? 'Deniz' }}</span>
 </header>
 
-<livewire:workspaces.forms.index />
+@yield('page')
 @endsection

@@ -38,6 +38,13 @@ class Index extends Component
             }
         }
 
-        return view('livewire.workspaces.forms.index', ['visible' => $visible]);
+        $user = auth()->user();
+        $forms = $user->workspaces()->with(['forms' => function ($query) use ($visible) {
+            $query->whereIn('status', $visible);
+        }])->get()->pluck('forms')->flatten();
+
+        return view('livewire.workspaces.forms.index', ['visible' => $visible, 'status' => $this->status, 'user' => $user, 'forms' => $forms])
+            ->extends('formcraft.forms')
+            ->section('page');
     }
 }

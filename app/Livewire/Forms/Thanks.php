@@ -11,6 +11,8 @@ class Thanks extends Component
     {
         return view('livewire.forms.thanks', [
             'demoSubmission' => session()->get('formcraft.preview.aralik_submission'),
-        ]);
+        ])
+            ->extends('formcraft.thanks')
+            ->section('page');
     }
 }

@@ -11,5 +11,5 @@
 @endpush
 
 @section('content')
-<livewire:welcome />
+@yield('page')
 @endsection

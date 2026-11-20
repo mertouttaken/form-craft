@@ -11,6 +11,8 @@ class Submissions extends Component
     {
         return view('livewire.workspaces.forms.submissions', [
             'demoSubmission' => session()->get('formcraft.preview.aralik_submission'),
-        ]);
+        ])
+            ->extends('formcraft.submissions')
+            ->section('page');
     }
 }

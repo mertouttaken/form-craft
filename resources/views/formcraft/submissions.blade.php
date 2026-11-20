@@ -27,7 +27,7 @@
   .detail { padding: 2.25rem 2rem 0; }
   .detail dl { margin: 1.5rem 0 0; }
   .detail dl > div { padding: .85rem 0; border-top: 1px solid var(--rule); }
-  .detail dt { font-size: .72rem; letter-spacing: .12em; font-weight: 700; text-transform: uppercase; font-variation-settings: "wdth" 72; color: var(--ink-2); }
+  .detail dt { font-size: .72rem; letter-spacing: .12em; font-weight: 700; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; color: var(--ink-2); }
   .detail dd { margin: .2rem 0 0; }
   .detail .meta { display: flex; justify-content: space-between; padding: 1rem 0 1.25rem; font-size: .85rem; color: var(--ink-2); }
   .empty { padding: 5rem 2rem; text-align: center; }
@@ -44,9 +44,9 @@
 @section('content')
 <header class="topbar">
   <a class="brand" href="{{ route('formcraft.home') }}"><b>FormCraft</b></a>
-  <span class="ws">Pro ekibi <span class="plan">Pro</span></span>
+  <span class="ws">Kişisel alanın <span class="plan">{{ Auth::user()?->planName() ?? 'Ücretsiz' }}</span></span>
   <nav class="nav" aria-label="Çalışma alanı"><a href="{{ route('formcraft.preview.forms') }}" aria-current="page">Formlar</a><a href="{{ route('formcraft.preview.members') }}">Üyeler</a></nav>
   <span class="me"><i>DY</i>Deniz</span>
 </header>
-<livewire:workspaces.forms.submissions />
+@yield('page')
 @endsection

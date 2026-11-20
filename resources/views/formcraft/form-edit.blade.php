@@ -11,12 +11,12 @@
   /* Folio: the chapter index in the margin, sticky. */
   .folio { position: sticky; top: 6rem; display: grid; gap: .25rem; }
   .folio a { display: flex; gap: .75rem; padding: .55rem 0; text-decoration: none; color: var(--sc-ink-soft); border-bottom: 1px solid rgb(255 255 255 / .1); font-size: .95rem; }
-  .folio a b { color: var(--canary); font-variation-settings: "wdth" 72; }
+  .folio a b { color: var(--canary); font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; }
   .folio a:hover { color: var(--white); }
   .sheet { padding: 0 3rem; }
   .chap { padding: 3rem 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 2.5rem; }
   .chap:first-child { border-top: 0; }
-  .chap h2 { margin: 0; font-size: 1.35rem; font-weight: 750; font-variation-settings: "wdth" 105; }
+  .chap h2 { margin: 0; font-size: 1.35rem; font-weight: 750; font-family: var(--fc-font-display); font-variation-settings: "wdth" 105; }
   .chap .field__help { margin-top: .5rem; }
   .stack { display: grid; gap: 1.75rem; }
   .status { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
@@ -35,9 +35,9 @@
 @section('content')
 <header class="topbar">
   <a class="brand" href="{{ route('formcraft.home') }}"><b>FormCraft</b></a>
-  <span class="ws">Pro ekibi <span class="plan">Pro</span></span>
+  <span class="ws">Kişisel alanın <span class="plan">{{ Auth::user()?->planName() ?? 'Ücretsiz' }}</span></span>
   <nav class="nav" aria-label="Çalışma alanı"><a href="{{ route('formcraft.preview.forms') }}" aria-current="page">Formlar</a><a href="{{ route('formcraft.preview.members') }}">Üyeler</a></nav>
   <span class="me"><i>DY</i>Deniz</span>
 </header>
-<livewire:workspaces.forms.edit />
+@yield('page')
 @endsection

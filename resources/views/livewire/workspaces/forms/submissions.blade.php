@@ -7,7 +7,7 @@
   </div>
   <nav class="tabs" aria-label="Form"><a href="{{ route('formcraft.preview.form-edit') }}">Ayarlar</a><a href="{{ route('formcraft.preview.fields') }}">Alanlar · 6</a><a href="{{ route('formcraft.preview.submissions') }}" aria-current="page">Yanıtlar · {{ $demoSubmission ? 129 : 128 }}</a></nav>
 
-  <div class="paper paper--pink" data-sc-in>
+  <div class="paper paper--pink" data-fc-in>
     <div class="bar">
       <label class="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="Yanıtlarda ara" aria-label="Yanıtlarda ara"></label>
       <div class="range"><span class="lbl">Tarih</span><input type="date" aria-label="Başlangıç" value="2026-09-01"><span>·</span><input type="date" aria-label="Bitiş" value="2026-09-30"></div>
@@ -16,7 +16,7 @@
     <div class="scroller">
       <table class="table">
         <thead><tr><th>No</th><th>Gönderim</th><th>Ad soyad</th><th>E-posta</th><th>Oturum</th><th>Kişi</th><th>Geliş</th></tr></thead>
-        <tbody data-sc-stagger="50" data-sc-in>
+        <tbody data-fc-stagger data-fc-in>
           @if ($demoSubmission)
             <tr data-demo-submission>
               <td><a href="{{ route('formcraft.preview.thanks') }}">Makbuz ↗</a></td>

@@ -3,31 +3,31 @@
    Ballpoint blue for what a person wrote, stamp red for status and commitment. */
 
 :root {
-  --desk:    #17224F;   /* blotter blue: the app's ground */
-  --desk-2:  #22306A;
-  --white:   #FBFBF8;
-  --canary:  #F6E7A1;
-  --pink:    #F5D2D8;
-  --ink:     #14161C;
-  --ink-2:   #4A4F5C;
-  --pen:     #1D3BA8;   /* ballpoint */
-  --stamp:   #C3122F;
+  --desk:    var(--fc-navy);   /* blotter blue: the app's ground */
+  --desk-2:  var(--fc-navy-2);
+  --white:   var(--fc-paper);
+  --canary:  var(--fc-canary);
+  --pink:    var(--fc-pink);
+  --ink:     var(--fc-ink);
+  --ink-2:   var(--fc-ink-2);
+  --pen:     var(--fc-pen);   /* ballpoint */
+  --stamp:   var(--fc-stamp);
   --rule:    rgb(20 22 28 / .16);
   --rule-2:  rgb(20 22 28 / .08);
 
   --sc-canvas: var(--desk);
   --sc-surface: var(--white);
   --sc-ink: var(--white);
-  --sc-ink-soft: #C9CEE4;
+  --sc-ink-soft: var(--fc-mist);
   --sc-accent: var(--stamp);
   --sc-accent-ink: #fff;
-  --sc-font-display: "Archivo", system-ui, sans-serif;
-  --sc-font-text: "Archivo", system-ui, sans-serif;
-  --sc-font-mono: "Archivo", system-ui, sans-serif;
+  --sc-font-display: var(--fc-font-display);
+  --sc-font-text: var(--fc-font-text);
+  --sc-font-mono: var(--fc-font-text);
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; font-family: "Archivo", system-ui, sans-serif; font-variation-settings: "wdth" 100; }
+body { margin: 0; font-family: var(--fc-font-text); }
 ::selection { background: var(--canary); color: var(--ink); }
 :focus-visible { outline: 2px solid var(--canary); outline-offset: 3px; border-radius: 0; }
 .paper :focus-visible { outline-color: var(--pen); }
@@ -36,7 +36,7 @@ a { color: inherit; }
 
 /* ---------- type ---------- */
 .d-xl, .d-lg, .d-md {
-  font-family: "Archivo"; font-weight: 800; margin: 0; letter-spacing: -0.02em; line-height: .92;
+  font-family: var(--fc-font-display); font-weight: 800; margin: 0; letter-spacing: -0.02em; line-height: .92;
   font-variation-settings: "wdth" 118; text-wrap: balance;
 }
 .d-xl { font-size: clamp(3rem, 1rem + 6vw, 7.2rem); }
@@ -44,9 +44,9 @@ a { color: inherit; }
 .d-md { font-size: clamp(1.7rem, 1rem + 1.4vw, 2.4rem); line-height: 1; }
 .lbl {
   font-weight: 650; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
-  font-variation-settings: "wdth" 72; margin: 0;
+  font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; margin: 0;
 }
-.pen { color: var(--pen); font-family: "Caveat", "Segoe Print", cursive; font-size: 1.35em; line-height: 1.1; }
+.pen { color: var(--pen); font-family: var(--fc-font-pen); font-size: 1.35em; line-height: 1.1; }
 .muted { color: var(--ink-2); }
 .lede { font-size: 1.2rem; line-height: 1.5; max-width: 40ch; margin: 0; }
 
@@ -58,7 +58,7 @@ a { color: inherit; }
 .paper--canary { background: var(--canary); }
 .paper--pink { background: var(--pink); }
 /* Form serial number corner, every printed form has one. */
-.serial { position: absolute; top: 1rem; right: 1.25rem; font-weight: 700; font-size: .78rem; letter-spacing: .12em; font-variation-settings: "wdth" 72; color: var(--stamp); }
+.serial { position: absolute; top: 1rem; right: 1.25rem; font-weight: 700; font-size: .78rem; letter-spacing: .12em; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; color: var(--stamp); }
 /* Perforation: a row of punched holes between a sheet and its stub. */
 .perf { height: 14px; background: radial-gradient(circle at 7px 7px, var(--desk) 3px, transparent 3.5px) 0 0 / 14px 14px repeat-x; }
 .paper--canary .perf, .paper--pink .perf { background-image: radial-gradient(circle at 7px 7px, var(--desk) 3px, transparent 3.5px); }
@@ -66,12 +66,12 @@ a { color: inherit; }
 /* ---------- the stamp (signature move) ---------- */
 .stamp {
   display: inline-block; padding: .35em .7em .3em; border: 3px double var(--stamp); color: var(--stamp);
-  font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 80;
+  font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 80;
   transform: rotate(var(--r, -6deg)); mix-blend-mode: multiply; opacity: .92;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.6'/></filter><rect width='120' height='60' filter='url(%23n)'/></svg>");
 }
-.stamp--draft { --stamp: #6B6F7B; }
-.stamp--closed { --stamp: #3A3D46; }
+.stamp--draft { --stamp: var(--fc-ink-3); }
+.stamp--closed { --stamp: var(--fc-ink-2); }
 .stamp--pen { --stamp: var(--pen); }
 /* Impact: arrives large and soft, lands with a short overshoot. */
 .stamp.is-landing { animation: stamp-land 420ms cubic-bezier(.2, 1.4, .4, 1) both; }
@@ -84,13 +84,13 @@ a { color: inherit; }
 /* ---------- buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 46px; padding: .7rem 1.2rem;
-  font: inherit; font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 80;
+  font: inherit; font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 80;
   border: 2px solid currentColor; background: transparent; color: inherit; cursor: pointer; text-decoration: none;
   transition: background-color 160ms ease-out, color 160ms ease-out, transform 120ms ease-out;
 }
 .btn:active { transform: translateY(1px); }
 .btn--stamp { background: var(--stamp); border-color: var(--stamp); color: #fff; }
-.btn--stamp:hover { background: #A30E27; border-color: #A30E27; }
+.btn--stamp:hover { background: var(--fc-stamp-deep); border-color: var(--fc-stamp-deep); }
 .btn--pen { background: var(--pen); border-color: var(--pen); color: #fff; }
 .btn--ghost:hover { background: currentColor; }
 .btn--ghost:hover > * { color: var(--white); }
@@ -100,7 +100,7 @@ a { color: inherit; }
 
 /* ---------- form fields: a printed box with a ruled answer line ---------- */
 .field { display: grid; gap: .35rem; }
-.field__no { font-weight: 700; font-size: .72rem; color: var(--stamp); font-variation-settings: "wdth" 72; letter-spacing: .1em; }
+.field__no { font-weight: 700; font-size: .72rem; color: var(--stamp); font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; letter-spacing: .1em; }
 .field label, .field .lbl { color: var(--ink-2); }
 .input, .select, .textarea {
   width: 100%; min-height: 48px; padding: .55rem .2rem; font: inherit; font-size: 1.05rem; color: var(--pen);
@@ -123,12 +123,12 @@ a { color: inherit; }
   border-bottom: 1px solid rgb(255 255 255 / .12); backdrop-filter: blur(8px);
 }
 .brand { display: flex; align-items: baseline; gap: .55rem; text-decoration: none; color: var(--white); }
-.brand b { font-weight: 800; font-size: 1.3rem; letter-spacing: -.01em; font-variation-settings: "wdth" 120; }
-.brand span { font-size: .7rem; letter-spacing: .16em; font-weight: 700; color: var(--canary); font-variation-settings: "wdth" 72; text-transform: uppercase; }
+.brand b { font-weight: 800; font-size: 1.3rem; letter-spacing: -.01em; font-family: var(--fc-font-display); font-variation-settings: "wdth" 120; }
+.brand span { font-size: .7rem; letter-spacing: .16em; font-weight: 700; color: var(--canary); font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; text-transform: uppercase; }
 .ws { display: flex; align-items: center; gap: .5rem; padding: .45rem .75rem; border: 1px solid rgb(255 255 255 / .22); font-size: .9rem; }
 .ws .plan { font-size: .65rem; letter-spacing: .14em; font-weight: 700; text-transform: uppercase; padding: .15rem .4rem; background: var(--canary); color: var(--ink); }
 .nav { display: flex; gap: 1.75rem; margin-left: auto; }
-.nav a { text-decoration: none; font-weight: 650; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-variation-settings: "wdth" 78; padding: .4rem 0; border-bottom: 2px solid transparent; }
+.nav a { text-decoration: none; font-weight: 650; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 78; padding: .4rem 0; border-bottom: 2px solid transparent; }
 .nav a[aria-current="page"] { border-color: var(--canary); }
 .me { display: flex; align-items: center; gap: .6rem; font-size: .9rem; }
 .me i { width: 2rem; height: 2rem; border-radius: 50%; background: var(--canary); color: var(--ink); display: grid; place-items: center; font-style: normal; font-weight: 800; }
@@ -141,7 +141,7 @@ a { color: inherit; }
 
 /* tabs used by form screens */
 .tabs { display: flex; gap: .25rem; margin: 0 0 -1px; }
-.tabs a { padding: .75rem 1.1rem; text-decoration: none; font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 78; background: var(--desk-2); color: var(--sc-ink-soft); }
+.tabs a { padding: .75rem 1.1rem; text-decoration: none; font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 78; background: var(--desk-2); color: var(--sc-ink-soft); }
 .tabs a[aria-current="page"] { background: var(--white); color: var(--ink); }
 
 /* notices */
@@ -150,7 +150,7 @@ a { color: inherit; }
 
 /* plain table on paper */
 .table { width: 100%; border-collapse: collapse; font-size: .98rem; }
-.table th { text-align: left; font-weight: 700; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-variation-settings: "wdth" 72; color: var(--ink-2); padding: .9rem 1rem; border-bottom: 2px solid var(--ink); background: var(--white); position: sticky; top: 4.25rem; z-index: 2; }
+.table th { text-align: left; font-weight: 700; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; color: var(--ink-2); padding: .9rem 1rem; border-bottom: 2px solid var(--ink); background: var(--white); position: sticky; top: 4.25rem; z-index: 2; }
 .table td { padding: .9rem 1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .table tbody tr:hover td { background: rgb(246 231 161 / .35); }
 .num { font-variant-numeric: tabular-nums; }

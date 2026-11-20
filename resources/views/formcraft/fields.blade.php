@@ -12,11 +12,11 @@
   /* Each field is a numbered row on the form, the way a printed form numbers its boxes. */
   .rows { list-style: none; margin: 0; padding: 0; }
   .row { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 9rem 8rem auto; align-items: center; gap: 1.5rem; padding: 1.25rem 2rem; border-bottom: 1px solid var(--rule); }
-  .row__no { font-size: 1.9rem; font-weight: 800; color: var(--stamp); font-variation-settings: "wdth" 72; }
+  .row__no { font-size: 1.9rem; font-weight: 800; color: var(--stamp); font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; }
   .row__label { font-size: 1.15rem; font-weight: 650; }
   .row__ph { color: var(--ink-2); font-size: .92rem; margin-top: .2rem; }
-  .type { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 72; padding: .3rem .55rem; border: 1px solid var(--ink); }
-  .req { font-size: .8rem; font-weight: 700; color: var(--stamp); letter-spacing: .1em; text-transform: uppercase; font-variation-settings: "wdth" 72; }
+  .type { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; padding: .3rem .55rem; border: 1px solid var(--ink); }
+  .req { font-size: .8rem; font-weight: 700; color: var(--stamp); letter-spacing: .1em; text-transform: uppercase; font-family: var(--fc-font-display); font-variation-settings: "wdth" 72; }
   .opt { font-size: .8rem; color: var(--ink-2); }
   .acts { display: flex; gap: .4rem; justify-content: flex-end; }
   .acts form { margin: 0; }
@@ -41,9 +41,9 @@
 @section('content')
 <header class="topbar">
   <a class="brand" href="{{ route('formcraft.home') }}"><b>FormCraft</b></a>
-  <span class="ws">Deniz Yılmaz'ın alanı <span class="plan">Ücretsiz</span></span>
+  <span class="ws">Kişisel alanın <span class="plan">{{ Auth::user()?->planName() ?? 'Ücretsiz' }}</span></span>
   <nav class="nav" aria-label="Çalışma alanı"><a href="{{ route('formcraft.preview.forms') }}" aria-current="page">Formlar</a><a href="{{ route('formcraft.preview.members') }}">Üyeler</a></nav>
-  <span class="me"><i>DY</i>Deniz</span>
+  <span class="me"><i>{{ substr(Auth::user()?->name, 0, 1) }}</i>{{ Auth::user()?->name ?? 'Deniz' }}</span>
 </header>
-<livewire:workspaces.forms.fields.index />
+@yield('page')
 @endsection

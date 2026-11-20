@@ -109,6 +109,8 @@ class Builder extends Component
             'types' => self::TYPES,
             'choiceTypes' => self::CHOICE_TYPES,
             'limit' => self::LIMIT,
-        ]);
+        ])
+            ->extends('formcraft.builder')
+            ->section('page');
     }
 }

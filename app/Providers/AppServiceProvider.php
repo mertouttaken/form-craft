@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -24,6 +25,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->configureSampleUrls();
+    }
+
+    /**
+     * Fill route parameters the preview pages leave out with the seeded
+     * sample data (database/seeders): Deniz's workspace, the Aralık
+     * Buluşması form and Selin's pending invitation.
+     */
+    protected function configureSampleUrls(): void
+    {
+        URL::defaults([
+            'workspace' => 'deniz',
+            'form' => 'aralik-bulusmasi',
+            'public_slug' => 'aralik-bulusmasi',
+            'token' => 'ornek-davet-selin',
+        ]);
     }
 
     /**

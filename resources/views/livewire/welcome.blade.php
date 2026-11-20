@@ -36,7 +36,14 @@
           <p aria-hidden="true">Katılımcı kayıt formu</p>
           <div class="stock-print" aria-hidden="true">
             <div class="stock-stamp">YAYINDA</div>
-            <div class="stamp-tool"><span></span></div>
+            <div class="stamp-tool">
+              <svg class="stamp-grip" viewBox="0 0 120 66" aria-hidden="true">
+                <rect class="grip-body" x="51" y="26" width="18" height="30"/>
+                <path class="grip-body" d="M30 31C30 11 44 2 60 2s30 9 30 29z"/>
+                <rect class="grip-collar" x="12" y="52" width="96" height="10" rx="3"/>
+                <ellipse class="grip-shine" cx="50" cy="12" rx="11" ry="4" transform="rotate(-18 50 12)"/>
+              </svg>
+            </div>
           </div>
           <a class="stock-link" href="{{ route('formcraft.preview.public-form') }}" aria-label="Aralık Buluşması formunu aç" inert>
             /f/aralik-bulusmasi <span aria-hidden="true">↗</span>
@@ -69,6 +76,23 @@
         <a href="{{ route('formcraft.preview.submissions') }}"><small>03 / YANIT</small><b>Yanıtları gör.</b><span>Gönderimleri çalışma alanında incele.</span><i aria-hidden="true">↗</i></a>
       </div>
     </div>
+  </section>
+  <section class="press-close" aria-labelledby="close-heading">
+    <article class="close-stub">
+      <span class="close-serial">No 0004 · senin formun</span>
+      <div>
+        <h2 id="close-heading">Sıradaki nüsha<br><em>senin formun.</em></h2>
+        <p>Formunu kur, linkini paylaş, gelen yanıtları ekibinle aynı yerde gör.</p>
+      </div>
+      <div class="close-actions">
+        @auth
+            <a class="press-button press-button--ink" href="{{ route('dashboard') }}">Çalışma alanım ↗</a>
+        @else
+            <a class="press-button press-button--ink" href="{{ route('register') }}">Ücretsiz başla ↗</a>
+            <a class="close-login" href="{{ route('login') }}">Hesabın var mı? Giriş yap</a>
+        @endauth
+      </div>
+    </article>
   </section>
 </main>
 <footer class="press-footer"><a class="brand" href="#bas"><b>FormCraft.</b></a><a href="{{ route('formcraft.preview.forms') }}">Örnek çalışma alanı ↗</a></footer>

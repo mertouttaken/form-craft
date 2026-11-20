@@ -61,6 +61,12 @@ class Create extends Component
 
         $workspace = Workspaces::where('slug', $this->workspace)->firstOrFail();
 
+        if (Index::limitReached($workspace, auth()->user())) {
+            $this->addError('title', 'Ücretsiz planda en fazla '.Index::FREE_FORM_LIMIT.' form olabilir. Bir formu sil ya da Pro plana geç.');
+
+            return;
+        }
+
         $form = Forms::create([
             'workspace_id' => $workspace->id,
             'title' => trim($this->title),

@@ -4,6 +4,7 @@ use App\Livewire\Workspaces\Forms\Create as FormCreate;
 use App\Livewire\Workspaces\Forms\Edit as FormEdit;
 use App\Livewire\Workspaces\Forms\Fields\Create as FieldCreate;
 use App\Livewire\Workspaces\Forms\Fields\Index as FieldsIndex;
+use App\Livewire\Workspaces\Forms\Index;
 use App\Livewire\Workspaces\Settings\Members;
 use App\Models\Fields;
 use App\Models\Forms;
@@ -13,7 +14,11 @@ use App\Models\Workspace_User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Livewire;
 
-beforeEach(fn () => $this->seed());
+beforeEach(function () {
+    $this->seed();
+    // The seeded free workspace is at its 3-form limit; make room for create tests.
+    Forms::where('public_slug', 'stajyer-basvurusu')->delete();
+});
 
 $form = ['workspace' => 'deniz', 'form' => 'aralik-bulusmasi'];
 
@@ -31,6 +36,30 @@ test('a taken link gets a number', function () {
 
     expect(Livewire::test(FormCreate::class, ['workspace' => 'deniz'])->set('title', 'Gezi Planı')->get('slug'))
         ->toBe('gezi_plani_2');
+});
+
+test('free plan stops at three forms', function () {
+    Livewire::test(FormCreate::class, ['workspace' => 'deniz'])->set('title', 'Dördüncü form')->call('save')->assertHasNoErrors();
+
+    Livewire::test(FormCreate::class, ['workspace' => 'deniz'])
+        ->set('title', 'Beşinci form')
+        ->call('save')
+        ->assertHasErrors('title');
+
+    expect(Forms::where('title', 'Beşinci form')->exists())->toBeFalse();
+});
+
+test('the forms list filters and searches the database', function () {
+    Livewire::test(Index::class, ['workspace' => 'deniz'])
+        ->assertSee('Aralık Buluşmasına kayıt')
+        ->assertSee('Yaz okulu memnuniyet anketi')
+        ->call('filter', 'closed')
+        ->assertDontSee('Aralık Buluşmasına kayıt')
+        ->call('filter', 'all')
+        ->set('search', 'ARALIK')
+        ->assertSee('Aralık Buluşmasına kayıt')
+        ->assertDontSee('Yaz okulu memnuniyet anketi')
+        ->assertSee(route('formcraft.preview.fields', ['workspace' => 'deniz', 'form' => 'aralik-bulusmasi']), false);
 });
 
 test('a form needs a title', function () {
@@ -121,4 +150,16 @@ test('members can be re-roled, removed and invited', function () {
         ->assertHasNoErrors();
 
     expect(Invitations::where('email', 'yeni@ornek.com')->value('role'))->toBe('viewer');
+});
+
+test('a new account gets its own workspace and header links point to it', function () {
+    $user = User::factory()->create(['name' => 'Yeni Kullanıcı']);
+
+    $this->actingAs($user)
+        ->get('/dashboard')
+        ->assertOk()
+        ->assertSee(route('formcraft.preview.forms', ['workspace' => 'yeni-kullanici']), false)
+        ->assertDontSee('/w/deniz/forms', false);
+
+    expect($user->workspaces()->first()->pivot->role)->toBe('owner');
 });

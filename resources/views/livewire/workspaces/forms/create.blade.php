@@ -23,7 +23,9 @@
       <span class="stamp stamp--draft" data-stamp style="font-size:.9rem">Taslak</span>
       <div style="display:flex;gap:.75rem">
         <a class="btn btn--ghost" href="{{ route('formcraft.preview.forms') }}">Vazgeç</a>
-        <button class="btn btn--stamp" type="submit" wire:loading.attr="disabled" wire:target="save"><span wire:loading.remove wire:target="save">Oluştur ve alan ekle</span><span wire:loading wire:target="save">Oluşturuluyor…</span></button>
+        <button class="btn btn--stamp" type="submit" wire:loading.attr="disabled" wire:target="save">
+          <span wire:loading.remove wire:target="save">Oluştur ve alan ekle</span>
+          <span wire:loading wire:target="save">Oluşturuluyor…</span></button>
       </div>
     </div>
     <div class="perf" style="margin:0 -4rem"></div>

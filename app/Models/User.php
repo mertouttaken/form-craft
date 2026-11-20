@@ -100,4 +100,35 @@ class User extends Authenticatable
             ->withPivot('role')
             ->withTimestamps();
     }
+
+    /**
+     * The user's first workspace. A user without one (a new account) gets a
+     * personal workspace they own, so the forms page always has a place.
+     */
+    public function personalWorkspace(): Workspaces
+    {
+        $existing = $this->workspaces()->orderBy('workspaces.id')->first();
+        if ($existing) {
+            return $existing;
+        }
+
+        $base = Str::slug($this->name, '-', 'tr') ?: 'alan';
+        $slug = $base;
+        $suffix = 2;
+        while (Workspaces::where('slug', $slug)->exists()) {
+            $slug = "{$base}-{$suffix}";
+            $suffix++;
+        }
+
+        $workspace = Workspaces::create([
+            'name' => 'Kişisel alanın',
+            'slug' => $slug,
+            'owner_id' => $this->id,
+            'plan' => $this->plan ?? self::PLAN_FREE,
+        ]);
+
+        $this->workspaces()->attach($workspace->id, ['role' => 'owner']);
+
+        return $workspace;
+    }
 }

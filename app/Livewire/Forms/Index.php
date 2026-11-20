@@ -22,7 +22,7 @@ class Index extends Component
 
     public function submit(): void
     {
-        $this->validate([
+        $validated = $this->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:254'],
             'session' => ['required', Rule::in(['morning', 'afternoon', 'both'])],
@@ -36,6 +36,22 @@ class Index extends Component
             'session.required' => 'Bir oturum seç.',
             'session.in' => 'Listeden bir oturum seç.',
             'attendees.between' => '1 ile 4 arasında bir sayı yaz.',
+        ]);
+
+        $sessionLabel = match ($validated['session']) {
+            'morning' => 'Sabah',
+            'afternoon' => 'Öğleden sonra',
+            'both' => 'İkisi de',
+        };
+
+        $arrivalDate = $validated['arrivalDate'] ?? null;
+        session()->put('formcraft.preview.aralik_submission', [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'session' => $sessionLabel,
+            'attendees' => $validated['attendees'] ?? null,
+            'arrivalDate' => $arrivalDate ? implode('.', array_reverse(explode('-', $arrivalDate))) : null,
+            'submittedAt' => now('Europe/Istanbul')->format('d.m.Y · H:i'),
         ]);
 
         $this->redirectRoute('formcraft.preview.thanks');

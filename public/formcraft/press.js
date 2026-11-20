@@ -1,6 +1,7 @@
 const scene = document.querySelector(".press-scene");
 const stage = document.querySelector(".press-window");
 const step = scene.querySelector(".press-step");
+const shareLink = scene.querySelector(".stock-link");
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 const clamp = value => Math.max(0, Math.min(1, value));
 const ramp = (value, from, to) => {
@@ -24,14 +25,17 @@ function draw() {
         "--share-slide": ramp(p, .09, .665),
         "--answer-slide": ramp(p, .28, .96),
         "--stamp-lift": 1 - ramp(p, .535, .685) + ramp(p, .705, .82),
-        "--stamp-presence": ramp(p, .53, .57) * (1 - ramp(p, .78, .85)),
+        "--stamp-presence": ramp(p, .485, .545) * (1 - ramp(p, .79, .85)),
         "--stamp-contact": reduced.matches ? 0 : contact,
         "--inked": ramp(p, .686, .716),
-        "--link-reveal": ramp(p, .746, .86),
+        "--link-reveal": ramp(p, .85, .91),
     };
     for (const [name, value] of Object.entries(properties)) {
         scene.style.setProperty(name, value.toFixed(4));
     }
+    const shareReady = p >= .91;
+    if (shareLink.inert === shareReady) shareLink.inert = !shareReady;
+
     const text = p < .68 ? "Formu hazırla" : p < .89 ? "Bağlantıyı paylaş" : "Yanıtları topla";
     if (step.textContent !== text) step.textContent = text;
 }
@@ -39,7 +43,11 @@ function draw() {
 function advance(time) {
     const delta = Math.min(48, time - previous);
     previous = time;
-    shown += (target - shown) * -Math.expm1(-delta / (reduced.matches ? 65 : 98));
+    const move = (target - shown) * -Math.expm1(-delta / (reduced.matches ? 65 : 98));
+    const next = shown + move;
+    const crossesStamp = Math.max(shown, next) > .48 && Math.min(shown, next) < .85;
+    // A large wheel step should still leave time to see the stamp touch the paper.
+    shown += crossesStamp ? Math.sign(move) * Math.min(Math.abs(move), delta / 680) : move;
     if (Math.abs(shown - target) < .0005) shown = target;
     draw();
     frame = shown === target ? 0 : requestAnimationFrame(advance);
@@ -69,4 +77,3 @@ reduced.addEventListener("change", () => {
     draw();
 });
 measure();
-

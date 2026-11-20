@@ -20,8 +20,8 @@
         <p>Ekibinle form hazırla, bağlantıyı paylaş. Gelen yanıtları aynı çalışma alanında gör.</p>
         <a class="press-button press-button--line" href="{{ route('formcraft.preview.builder') }}">Form kurucuyu dene <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="press-samples" aria-hidden="true">
-        <div class="press-stock stock-answer">
+      <div class="press-samples">
+        <div class="press-stock stock-answer" aria-hidden="true">
           <div class="stock-head"><span>03 / YANIT</span><span>FORMCRAFT</span></div>
           <h2>Kayıt defteri</h2>
           <div class="stock-record"><b>Ad soyad</b><small>Oturum</small></div>
@@ -31,17 +31,19 @@
           <span class="stock-foot">YANITLAYAN NÜSHASI</span>
         </div>
         <div class="press-stock stock-public">
-          <div class="stock-head"><span>02 / PAYLAŞIM</span><span>FORMCRAFT</span></div>
-          <h2>Aralık Buluşması</h2>
-          <p>Katılımcı kayıt formu</p>
-          <div class="stock-print">
+          <div class="stock-head" aria-hidden="true"><span>02 / PAYLAŞIM</span><span>FORMCRAFT</span></div>
+          <h2 aria-hidden="true">Aralık Buluşması</h2>
+          <p aria-hidden="true">Katılımcı kayıt formu</p>
+          <div class="stock-print" aria-hidden="true">
             <div class="stock-stamp">YAYINDA</div>
             <div class="stamp-tool"><span></span></div>
           </div>
-          <div class="stock-link">/f/aralik-bulusmasi <span>↗</span></div>
-          <span class="stock-foot">HERKESE AÇIK NÜSHA</span>
+          <a class="stock-link" href="{{ route('formcraft.preview.public-form') }}" aria-label="Aralık Buluşması formunu aç" inert>
+            /f/aralik-bulusmasi <span aria-hidden="true">↗</span>
+          </a>
+          <span class="stock-foot" aria-hidden="true">HERKESE AÇIK NÜSHA</span>
         </div>
-        <div class="press-stock stock-edit">
+        <div class="press-stock stock-edit" aria-hidden="true">
           <div class="stock-head"><span>01 / ASIL NÜSHA</span><span>FC–0147</span></div>
           <p class="stock-type">ETKİNLİK KAYDI</p>
           <h2>Aralık<br>buluşmasına<br>kayıt.</h2>
